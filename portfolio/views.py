@@ -3,10 +3,13 @@ from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, DetailView, FormView
 from django.contrib import messages
 from .models import Category, Message, Work, Service, Testimony, Author
+from .forms import EmailMessageForm
+from django.core.mail import send_mail
 
 class IndexView(TemplateView):
     
@@ -14,10 +17,10 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context.update(kwargs={'categories': Category.objects.all(),
-                               'works': Work.objects.all(),
-                               'services': Service.objects.all(),
-                               'testimonies': Testimony.objects.all()})
+        context.update(categories=Category.objects.all(),
+                               works=Work.objects.all(),
+                               services=Service.objects.all(),
+                               testimonies=Testimony.objects.all())
         return context
 
 class AboutView(TemplateView):
@@ -26,7 +29,6 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        kw_args = {'author': Author.objects.all()[0]}
         context.update(author=Author.objects.get())
         return context
     
@@ -48,17 +50,32 @@ class WorkDetailView(DetailView):
 class ContactView(FormView):
 
     template_name = 'contact.html'
+    form_class = EmailMessageForm
+    success_url = reverse_lazy('index')
 
-    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        return render(request, template_name='contact.html')
-
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        msg = Message(
-            name=request.POST['name'],
-            email=request.POST['email'],
-            subject=request.POST['subject'],
-            message=request.POST['message']
+    def form_valid(self, form: Any) -> HttpResponse:
+        msg = form.save()
+        send_mail(
+            subject=msg.subject,
+            message=f'Message from:\n{msg.name}\n\nEmail:\n{msg.email}\n\nMessage text:\n{msg.message}',
+            from_email=msg.email,
+            recipient_list=['marat.fominn@gmail.com'],
+            fail_silently=False
         )
-        msg.save()
-        messages.success(request, 'Message sent')
-        return redirect(request, 'contact')
+        messages.success(self.request, 'Message sent')
+        return super().form_valid(form)
+
+    # def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    #     return render(request, template_name='contact.html')
+
+    # def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    #     msg = Message(
+    #         name=request.POST['name'],
+    #         email=request.POST['email'],
+    #         subject=request.POST['subject'],
+    #         message=request.POST['message']
+    #     )
+    #     msg.save()
+    #     messages.success(request, 'Message sent')
+    #     return redirect(request, 'contact')
+    

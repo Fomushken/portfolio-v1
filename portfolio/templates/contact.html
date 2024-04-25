@@ -15,22 +15,12 @@
             <form action="{% url 'contact' %}" method="post" role="form" class="message-form">
                {% csrf_token %}
                <div class="row gy-3">
-                  <div class="col-md-6 form-group">
-                     <label for="name">Name</label>
-                     <input type="text" name="name" class="form-control" id="name" required>
+               {% for f in form %}
+                  <div class="{% cycle 'col-md-6' 'col-md-6' 'col-md-12' 'col-md-12' %} form-group">
+                     {{ f.label }}
+                     {{ f }}
                   </div>
-                  <div class="col-md-6 form-group">
-                     <label for="name">Email</label>
-                     <input type="email" class="form-control" name="email" id="email" required>
-                  </div>
-                  <div class="col-md-12 form-group">
-                     <label for="name">Subject</label>
-                     <input type="text" class="form-control" name="subject" id="subject" required>
-                  </div>
-                  <div class="col-md-12 form-group">
-                     <label for="name">Message text</label>
-                     <textarea class="form-control" name="message" cols="30" rows="10" required></textarea>
-                  </div>
+                  {% endfor %}
                   <div class="col-md-6 mt-0 form-group">
                      <input type="submit" class="readmore d-block w-100" value="Submit">
                   </div>
@@ -50,6 +40,9 @@
                <li class="mb-3">
                   <strong class="d-block mb-1">Email</strong>
                   <span>marat.fominn@gmail.com</span>
+               </li>
+               <li class="mb-3">
+                
                </li>
             </ul>
          </div>

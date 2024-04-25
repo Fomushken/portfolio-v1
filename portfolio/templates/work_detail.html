@@ -14,7 +14,7 @@
    <div class="container">
       <div class="row align-items-stretch">
          <div class="col-md-8" data-aos="fade-up">
-            <img src="{{ work.image.url }}" alt="Image" class="img-fluid">
+            <img src="{{ work.image.url }}" alt="Image" class="img-project">
             <div class="pe-5">
                <p>{{ work.description|safe }}</p>
             </div>
@@ -24,11 +24,11 @@
                <h3 class="h3">{{ work.title }}</h3>
                <p class="mb-4"><span class="text-muted">{{ work.category }}</span></p>
                <div class="mb-5">
-                  <p>Janguager, libraries and frameworks which I user for this project.</p>
+                  <p>Janguages, libraries and frameworks which I used for this project.</p>
                </div>
                <h4 class="h4 mb-3">Tech stack</h4>
                {{ work.stack|safe }} 
-               <p><a href="{{ work.link }}" class="readmore">Project URL</a></p>
+               <p><a href="{{ work.link }}" target="_blank" class="readmore">Project URL</a></p>
             </div>
          </div>
       </div>

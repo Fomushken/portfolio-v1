@@ -339,6 +339,7 @@ a:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 5;
 }
 
 div.author-image {
@@ -365,6 +366,11 @@ div.about {
   margin-bottom: 5em;
 }
 
+img.img-project {
+  width: 100%;
+  margin-bottom: 3em;
+}
+
 @media (min-width: 750px){
 div.about {
   padding-left: 20%;
@@ -374,3 +380,4 @@ div.about {
   margin-bottom: 5em;
 }
 }
+
