@@ -13,8 +13,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['web-production-cd9a.up.railway.app',
                  'fomushken.up.railway.app',
+                 'www.fomushken.up.railway.app',
                 #  '127.0.0.1'
                  ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://fomushken.up.railway.app',
+    'https://www.fomushken.up.railway.app',
+]
 
 INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
