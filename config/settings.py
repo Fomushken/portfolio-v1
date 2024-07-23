@@ -14,7 +14,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['web-production-cd9a.up.railway.app',
                  'fomushken.up.railway.app',
                  'www.fomushken.up.railway.app',
-                #  '127.0.0.1'
+                 '127.0.0.1'
                  ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -34,7 +34,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
