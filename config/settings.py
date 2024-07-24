@@ -15,7 +15,9 @@ ALLOWED_HOSTS = ['web-production-cd9a.up.railway.app',
                  'fomushken.up.railway.app',
                  'www.fomushken.up.railway.app',
                  '127.0.0.1',
-                 'localhost'
+                 'localhost',
+                 '0.0.0.0',
+                 'railway.app'
                  ]
 
 CSRF_TRUSTED_ORIGINS = [
