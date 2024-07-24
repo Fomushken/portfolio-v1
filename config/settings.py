@@ -11,6 +11,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
+PORT = os.getenv('PORT', '8000')
+
 ALLOWED_HOSTS = ['web-production-cd9a.up.railway.app',
                  'fomushken.up.railway.app',
                  'www.fomushken.up.railway.app',
