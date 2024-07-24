@@ -1,0 +1,11 @@
+{
+    "phases": {
+      "setup": {
+        "nixpkgs": [
+          "mysqlClient",
+          "gcc",
+          "python3Packages.virtualenv"
+        ]
+      }
+    }
+  }
